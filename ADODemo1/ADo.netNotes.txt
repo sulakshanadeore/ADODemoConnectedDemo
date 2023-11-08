@@ -1,0 +1,150 @@
+ADo.net
+
+
+
+COM---Component Object Model
+
+Ado---> ActiveX Data Objects
+
+
+each component is made up of multiple smaller compoenents inside it.
+
+The name of the middle component is ADO
+Middle componet is connected Service coponent of database server, for identifying the servername,userid,password and database.
+Middle component ado.net has all the things required to work with the database server.
+
+
+C#----Collections---Data Structure(Collections(Stack,Queue,List,LinkedList,dictionary etc)
+				   
+
+Ado.net has its own Collections to work with the database, and hold the database of the database
+
+Ado.net---> Database----->        
+
+       DB Collections means they can hold data:
+       1)DataReader
+       2) Data Table
+       3)Data Column
+       4) DataRows
+       5)DataViews
+
+Ado.net has 2 architectures:
+1) Connected Architecture
+   a)DataReader
+
+2) Disconnected Architecture
+    b) Data Table
+      c)Data Column
+       d) DataRows
+       e)DataViews
+
+Connected Architecture---->Database and Application are 24/7 connected to each other and notify each other immediately--
+Realtime Apps---->Bank Transactions---OTP
+             GoogleMaps----
+              TrainStatus(intime/late)---
+
+immediately updated---Connected Architecure 
+RTGS/Gpay/PhonePe/Paytm----->immediately-->Connected
+Shares----realtime---
+
+
+----------------------------------------------------------------------------------
+
+Non-Realtime Apps----- When database updates then the app updates---->12 ---->irctc app---
+
+
+
+Disconected Architecure---->updating some time later
+-------------------------------------------------
+Waiting---after the chart is prepared--confirmed                   
+Booking a train ticket
+OutOfStock---- Notify me----Now you can book your order
+Booking Order On Amazon
+----------------------------------------------------------------------------------------
+
+		Ado.net provides classes etc on the basis of namespace used:
+SqlServer--->using System.Data.SqlClient;
+Access/Excel----->using System.Data.OleDB;
+Oracle------>using System.Data.OracleClient;
+ODBC-------->using System.Data.ODBC;
+
+
+
+Connected Architecture:					
+Collection---> DataReader
+SqlCommand Class for working on the table/sp/views/etc
+
+
+
+Disconnected Architecute
+Collection----> a) DataSet b) Data Table   c)Data Column      d) DataRows      e)DataViews
+SqlDataAdapter Class for working on the table/sp/views/etc
+
+
+Common Requirement for both architecture
+SQLConnection Class to connect to the Database Server---parameterised constructor---
+paramters----> servername
+userid
+password
+database name
+SqlConnection cn=new SqlConnection("server=Sulakshana\sqlexpress;Integrated Security=true;database=northwind");
+//connected to your server
+
+//SERVER Explorer
+Data Source=Sulakshana\sqlexpress;Initial Catalog=Northwind;Integrated Security=True
+
+
+
+//SQL SERVER OBject Explorer
+Data Source=(localdb)\ProjectModels;Initial Catalog=master;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False
+
+
+
+
+
+System.Data.SQLClient
+	     ---------
+SQLSERVER       SqlConnection
+                SqlCommand
+                SqlDataAdapter
+		SqlDataReader
+
+------------------------------------
+System.Data.Oledb
+Access       OleDBConnection
+	OledbCommand
+        OledbDataAdapter
+	OledbDataReader
+-------------------------
+System.Data.OracleClient
+Oracle   OracleConnection, OracleCommand,OracleDataAdapter,OracleDataReader
+
+---------------------------------------------------------------------------------
+
+Connected:
+When connnection is established, then in case of connected architecture we use sql command objects to insert/update/delete data.
+----------------------------------------------------------------
+Disconnected:
+When connnection is established, then in case of disconnected architecture we use  sqLdataAdapter objects to get the from the table in the database into the datasets
+datatable, then the connection which was established disconnects itself and we work with dataset, datatable,datarow and datacolumn.
+It is disconnected architecture.
+Dataset resembles database which can hold multiple datatables inside it.
+Each datatable can store data for a single database table
+Each datatable has multiple rows and columns.
+Row is called as DataRow, and column as Data Column.
+Insert/Update/Delete takes place on the DataTable.
+And to give the changes to the database from the datatable we use SqlCommandBuilder class object to reconnect to the database using dataAdapter.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
