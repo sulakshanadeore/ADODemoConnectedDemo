@@ -89,5 +89,54 @@ namespace ADODemo1
 
 
         }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            SqlConnection cn = new SqlConnection("server=Sulakshana\\sqlexpress;Initial Catalog=northwind;Integrated Security=True");
+
+            SqlCommand cmd = new SqlCommand("UpdateDept", cn);
+            cmd.CommandType = CommandType.StoredProcedure;
+ 
+            cmd.Parameters.AddWithValue("@p_deptno", Convert.ToInt32(txtDeptno.Text));
+            cmd.Parameters.AddWithValue("@p_dname", txtdeptname.Text.Trim());
+            cmd.Parameters.AddWithValue("@p_loc", txtdeptloc.Text.Trim());
+            cn.Open();
+            cmd.ExecuteNonQuery();
+            cn.Close();
+            cn.Dispose();
+            MessageBox.Show("Updated successfully");
+            btnShowAll_Click(sender, e);
+
+        }
+
+        private void btnFind_Click(object sender, EventArgs e)
+        {
+            SqlConnection cn = new SqlConnection("server=Sulakshana\\sqlexpress;Initial Catalog=northwind;Integrated Security=True");
+            SqlCommand cmd = new SqlCommand("select * from department where deptno=" + Convert.ToInt32(txtDeptno.Text),cn);
+            cn.Open();
+            SqlDataReader dr=cmd.ExecuteReader();
+            if (dr.HasRows)
+            {
+                dr.Read();
+                Dept d = new Dept();
+                d.Deptno = Convert.ToInt32(dr["deptno"]);
+                d.Deptname = dr["dname"].ToString();
+                d.DeptLoc = dr["loc"].ToString();
+
+                txtdeptname.Text = d.Deptname;
+                txtdeptloc.Text = d.DeptLoc;
+
+                //txtdeptname.Text= dr["dname"].ToString();
+                //txtdeptloc.Text = dr["loc"].ToString();
+
+
+
+                MessageBox.Show("Record found successfully");
+            }
+
+
+            cn.Close();
+            cn.Dispose();
+        }
     }
 }

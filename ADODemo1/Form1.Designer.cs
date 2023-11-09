@@ -72,6 +72,7 @@
             this.btnEdit.TabIndex = 2;
             this.btnEdit.Text = "Save Data";
             this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnFind
             // 
@@ -81,6 +82,7 @@
             this.btnFind.TabIndex = 3;
             this.btnFind.Text = "Find Record";
             this.btnFind.UseVisualStyleBackColor = true;
+            this.btnFind.Click += new System.EventHandler(this.btnFind_Click);
             // 
             // btnDelete
             // 
